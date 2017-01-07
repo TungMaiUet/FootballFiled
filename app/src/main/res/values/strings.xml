@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FootballFiled</string>
+    <string name="app_id">382929942053917</string>
+    <string name="fb_login_protocol_scheme">fb382929942053917</string>
+    <string name="back_login"><![CDATA[ <u>ABC</u> ]]></string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+</resources>

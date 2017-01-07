@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "578887319171",
+    "firebase_url": "https://footballfirebase.firebaseio.com",
+    "project_id": "footballfirebase",
+    "storage_bucket": "footballfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578887319171:android:22a6715de360cfa4",
+        "android_client_info": {
+          "package_name": "com.example.tungmai.footballfiled"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578887319171-fkdfjllgm8imjpskpgt6gs8kf46qurc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tungmai.footballfiled",
+            "certificate_hash": "DC4FE4B25A502FFFC6F87B804FF37AD594BB0358"
+          }
+        },
+        {
+          "client_id": "578887319171-prtvdomues35peldkf0fb3hu25tqhib3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUkZ4ExmcaD9HnQJE4__I1Vqtqyv-2DL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578887319171-prtvdomues35peldkf0fb3hu25tqhib3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
