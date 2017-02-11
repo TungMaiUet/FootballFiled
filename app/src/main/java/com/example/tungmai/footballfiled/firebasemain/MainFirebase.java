@@ -80,28 +80,44 @@ public class MainFirebase {
 //
     }
 
-    public void sendMessage(String idSender, String idRecipient, String nameRecipient, String urlImageRecipient, String contentMessage, String time) {
+    public void sendMessage(String idSender,String nameSender,String urlImageSender, String idRecipient, String nameRecipient, String urlImageRecipient, String contentMessage, String time) {
         final Map<String, String> mh = new HashMap<>();
 //        mh.put("idRecipient", idRecipient);
         mh.put("nameRecipient", nameRecipient);
-        mh.put("urlImageRecipient", urlImageRecipient);
+//        mh.put("urlImageRecipient", urlImageRecipient);
         mh.put("contentMessage", contentMessage);
-        mh.put("mRecipientOrSenderStatus",0+"");
+        mh.put("mRecipientOrSenderStatus", 0 + "");
         mh.put("time", time);
 
         final Map<String, String> mh1 = new HashMap<>();
 //        mh1.put("idSender", idRecipient);
-        mh1.put("nameSender", nameRecipient);
-        mh1.put("urlImageSender", urlImageRecipient);
+        mh1.put("nameSender", nameSender);
+//        mh1.put("urlImageSender", urlImageSender);
         mh1.put("contentMessage", contentMessage);
-        mh.put("mRecipientOrSenderStatus",1+"");
+        mh1.put("mRecipientOrSenderStatus", 1 + "");
         mh1.put("time", time);
 
-        Firebase writeSender = firebase.child("user/"+idSender+"/messagers/"+idRecipient).push();
-        Firebase writeRecipient = firebase.child("user/"+idRecipient+"/messagers/"+idSender).push();
+        Map<String, String> mhIntroduction = new HashMap<>();
+        mhIntroduction.put("name", nameRecipient);
+        mhIntroduction.put("time", time);
+        mhIntroduction.put("content", contentMessage);
+        mhIntroduction.put("urlImage", urlImageRecipient);
+
+        Map<String, String> mhIntroduction1 = new HashMap<>();
+        mhIntroduction1.put("name", nameSender);
+        mhIntroduction1.put("time", time);
+        mhIntroduction1.put("content", contentMessage);
+        mhIntroduction1.put("urlImage", urlImageSender);
+
+        Firebase writeSender = firebase.child("user/" + idSender + "/messagers/" + idRecipient + "/contentMessager").push();
+        String idWrite = writeSender.getKey();
+        Firebase writeRecipient = firebase.child("user/" + idRecipient + "/messagers/" + idSender + "/contentMessager/" + idWrite);
         writeSender.setValue(mh);
         writeRecipient.setValue(mh1);
-
+        Firebase writeIntro=firebase.child("user/" + idSender + "/messagers/" + idRecipient + "/introduction/");
+        Firebase writeIntro1=firebase.child("user/" + idRecipient + "/messagers/" + idSender + "/introduction/");
+        writeIntro.setValue(mhIntroduction);
+        writeIntro1.setValue(mhIntroduction1);
     }
 
     public void writeNoti(String idUser, int typeWrite, String title, String phone, String nameGroup, String address, String describe, String time, String date, int edit, final ArrayList<Uri> arrUri, final ProgressDialog progressDialog) {

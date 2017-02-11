@@ -57,7 +57,11 @@ public class ListFriendChatMessageAdapter extends ArrayAdapter {
         }
 
         ChatMessage message = arrChatMessage.get(position);
-
+        if(message.getUrlImage().isEmpty()){
+            viewHolder.ivContact.setImageResource(R.drawable.user);
+        }else{
+            Picasso.with(getContext()).load(message.getUrlImage()).into(viewHolder.ivContact);
+        }
         viewHolder.tvName.setText(message.getNameRecipient());
         viewHolder.tvContent.setText(message.getContent());
         viewHolder.tvDate.setText(message.getTime());

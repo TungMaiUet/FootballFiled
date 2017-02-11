@@ -75,17 +75,39 @@ public class ListFriendMessageFragment extends android.support.v4.app.Fragment i
 
     public void getData() {
         ChatMessageActivity chatMessageActivity = (ChatMessageActivity) getActivity();
-        String idUser = chatMessageActivity.getIdUser();
+        final String idUser = chatMessageActivity.getIdUser();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user/" + idUser + "/messagers/");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++) {
-                    DataSnapshot dataSnapshot1=dataSnapshot.child(dataSnapshot.getKey());
-//                    String keyMessager = dataSnapshot.child((String) dataSnapshot.getValue()).getKey();
-                    Log.e(TAG, dataSnapshot1.toString());
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    arrChatMessage.clear();
+                    String key = data.getKey();
+                    DataSnapshot dataSnapshot1 = dataSnapshot.child(key + "/introduction/");
+                    String name = (String) dataSnapshot1.child("name").getValue();
+                    String content = (String) dataSnapshot1.child("content").getValue();
+                    String time = (String) dataSnapshot1.child("time").getValue();
+                    String urlImage = (String) dataSnapshot1.child("urlImage").getValue();
+//                    Log.e(TAG,name);
+                    ChatMessage chatMessage = new ChatMessage("", name, "", "", content, time,urlImage,1);
+                    arrChatMessage.add(chatMessage);
+//                    DatabaseReference myRefM = database.getReference("user/" + idUser + "/messagers/" + key+"/introduction/");
+//                    myRefM.limitToLast(1).addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                           String key=dataSnapshot.getKey();
+//                            DataSnapshot dataSnapshot1=dataSnapshot.child(key);
+//                            Log.e(TAG,dataSnapshot1.toString());
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
                 }
+                listFriendChatMessageAdapter.notifyDataSetChanged();
             }
 
             @Override

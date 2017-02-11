@@ -12,20 +12,27 @@ public class ChatMessage {
     private String nameSender;
     private String content;
     private String time;
+    private String urlImage;
 
     private int mRecipientOrSenderStatus;
 
-    public ChatMessage() {
-    }
-
-    public ChatMessage(String idRecipient, String nameRecipient, String idSender, String nameSender, String content, String time, int mRecipientOrSenderStatus) {
+    public ChatMessage(String idRecipient, String nameRecipient, String idSender, String nameSender, String content, String time, String urlImage, int mRecipientOrSenderStatus) {
         this.idRecipient = idRecipient;
         this.nameRecipient = nameRecipient;
         this.idSender = idSender;
         this.nameSender = nameSender;
         this.content = content;
         this.time = time;
+        this.urlImage = urlImage;
         this.mRecipientOrSenderStatus = mRecipientOrSenderStatus;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
     public String getIdRecipient() {

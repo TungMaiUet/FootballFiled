@@ -112,18 +112,18 @@ public class AddMessageFragment extends Fragment implements View.OnClickListener
                     Toast.makeText(getActivity(), "Bạn chưa nhập tin nhắn", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(idRecipient==null){
+                if (idRecipient == null) {
                     Toast.makeText(getActivity(), "Bạn chưa chọn người nhận tin nhắn", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 ChatMessageActivity chatMessageActivity = (ChatMessageActivity) getActivity();
                 String idSender = chatMessageActivity.getIdUser();
-                String nameSender=chatMessageActivity.getNameUser();
-                String urlImageSender=chatMessageActivity.getUrlImageUser();
+                String nameSender = chatMessageActivity.getNameUser();
+                String urlImageSender = chatMessageActivity.getUrlImageUser();
 
 
-                mainFirebase.sendMessage(idSender, idRecipient, nameRecipient, urlRecipient, message, time);
+                mainFirebase.sendMessage(idSender,nameSender,urlImageSender, idRecipient, nameRecipient, urlRecipient, message, time);
                 edtInput.setText("");
                 break;
             case R.id.iv_back:
@@ -180,16 +180,26 @@ public class AddMessageFragment extends Fragment implements View.OnClickListener
                                                                           @Override
                                                                           public void onDataChange(DataSnapshot dataSnapshot) {
                                                                               HashMap<String, String> map = (HashMap<String, String>) dataSnapshot.getValue();
-
+//                  Log.e(TAG,map.toString());
                                                                               Iterator myVeryOwnIterator = map.keySet().iterator();
                                                                               while (myVeryOwnIterator.hasNext()) {
                                                                                   String key = (String) myVeryOwnIterator.next();
                                                                                   Object valueTemp = (Object) map.get(key);
                                                                                   String strValue = valueTemp.toString();
-                                                                                  String value = strValue.substring(strValue.lastIndexOf("=") + 1, strValue.length() - 1).toLowerCase();
-                                                                                  String image = strValue.substring(strValue.lastIndexOf("imageUser=") + 10, strValue.lastIndexOf(","));
+                                                                                  Log.e(TAG, strValue);
+                                                                                  int indexNameUser = strValue.lastIndexOf("nameUser=") + 9;
+//                      int index=strValue.indexOf(",",indexNameUser-1);
+//                      Log.e(TAG,index+"");
+                                                                                  String value;
+                                                                                  if (strValue.charAt(strValue.length() - 2) != '}') {
+                                                                                      value = strValue.substring(indexNameUser, strValue.length() - 1).toLowerCase();
+                                                                                  } else {
+                                                                                      value = strValue.substring(indexNameUser, strValue.indexOf(",",indexNameUser)).toLowerCase();
+                                                                                  }
+                                                                                  int indexImage = strValue.lastIndexOf("imageUser=") + 10;
+                                                                                  String image = strValue.substring(indexImage, strValue.indexOf(",", indexImage));
 
-//                     Log.e(TAG,image);image
+//
                                                                                   if (image == null) image = "";
                                                                                   if (value.contains(finalText)) {
                                                                                       ItemSearchAddMessage itemSearchAddMessage = new ItemSearchAddMessage(key, image, value);
@@ -213,7 +223,7 @@ public class AddMessageFragment extends Fragment implements View.OnClickListener
 //        tvSearch.setText(arrItemSearch.get(position).getName());
         nameRecipient = arrItemSearch.get(position).getName();
         idRecipient = arrItemSearch.get(position).getIdUser();
-        urlRecipient=arrItemSearch.get(position).getUrlImage();
+        urlRecipient = arrItemSearch.get(position).getUrlImage();
         searchView.setQuery(nameRecipient, false);
 //        if (!searchView.isIconified()) {
 //            searchView.clearFocus();
