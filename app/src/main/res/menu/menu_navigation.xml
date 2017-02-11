@@ -5,6 +5,13 @@
         android:id="@+id/home"
         android:title="Home"
         android:icon="@drawable/home"/>
+
+    <item
+        android:id="@+id/message"
+        android:title="Message"
+        android:icon="@drawable/messenger_bubble_large_blue"/>
+
+
     <item
         android:id="@+id/settings"
         android:title="Settings"

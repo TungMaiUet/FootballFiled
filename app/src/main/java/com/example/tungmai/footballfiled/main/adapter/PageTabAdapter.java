@@ -4,9 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.tungmai.footballfiled.main.tablayout.Tab1;
-import com.example.tungmai.footballfiled.main.tablayout.Tab2;
-import com.example.tungmai.footballfiled.main.tablayout.Tab3;
+import com.example.tungmai.footballfiled.main.fragment.Tab1;
+import com.example.tungmai.footballfiled.main.fragment.Tab2;
+import com.example.tungmai.footballfiled.main.fragment.Tab3;
+import com.example.tungmai.footballfiled.main.fragment.Tab4;
 
 /**
  * Created by tungmai on 08/01/2017.
@@ -33,6 +34,9 @@ public class PageTabAdapter extends FragmentStatePagerAdapter {
             case 2:
                 Tab3 tab3 = new Tab3();
                 return tab3;
+            case 3:
+                Tab4 tab4 = new Tab4();
+                return tab4;
         }
         return null;
     }
